@@ -1,4 +1,4 @@
-# projeto1
+# Projeto Vue para Curso da Udemy
 
 ## Project setup
 ```
