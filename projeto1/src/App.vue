@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-    <alunos />
+    <Nav></Nav>
+    <div class="margemPrincipal">
+      <router-view :key="$route.fullPath"> </router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import alunos from './components/Aluno/alunos-A.vue'
+
+import Nav from './components/_nav/Nav-A.vue'
 
 export default {
   name: 'App',
   components: {
-    alunos
+    Nav
   }
 }
 </script>
@@ -19,55 +23,73 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
 
 #app {
-
+  width: 100%;
 }
 
-body{
+.margemPrincipal {
+  width: 50%;
+  margin: auto;
+}
+
+body {
   background-color: lightgray;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   display: grid;
   justify-items: center;
 }
-body, html{
+
+body,
+html {
   margin: 0px;
   height: 100%;
 }
+
 table {
   margin: 0px;
   padding: 0px;
   list-style-type: none;
   width: 100%;
 }
-table tr td { 
+
+table tr td {
   padding: 10px;
   font-size: 1.1em;
   background-color: rgb(211, 255, 241);
   margin-bottom: 20px;
+  text-align: center;
 }
-table thead th{
-  background-color: rgb(100, 253, 202);
+
+table thead th {
+  background-color: rgb(83, 204, 164);
   font-size: 1.2em;
   padding: 10px 0px;
-  text-align: center !important;
+  text-align: center;
 }
-.colPequeno{
+
+.colPequeno {
   width: 5%;
+  text-align: right;
+  background-color: rgb(100, 253, 202);
+  font-weight: bold;
 }
-.btnDanger{
+
+.btnDanger {
   background-color: rgb(252, 103, 86);
 }
-.btn{
+
+.btn {
   width: 100%;
   padding: 8px 8px;
   cursor: pointer;
   border: 1.5px solid black;
-  color: antiquewhite;
+  color: aliceblue;
   font-weight: bold;
-  font-size: 0.7em;
+  font-size: 1em;
   border-radius: 5px;
   border-bottom: 3px solid black;
 }
-.btn:hover{
+
+.btn:hover {
   text-shadow: 1px 1px black;
   border-bottom: 1px solid black;
   margin-top: 2px;

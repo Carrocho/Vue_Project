@@ -1,14 +1,107 @@
 {
+  "professores": [
+    {
+      "id": 1,
+      "nome": "Pericles",
+      "sobrenome": "Pericles"
+    },
+    {
+      "id": 2,
+      "nome": "The",
+      "sobrenome": "Rock"
+    },
+    {
+      "id": 3,
+      "nome": "Maria",
+      "sobrenome": "Silva"
+    },
+    {
+      "id": 4,
+      "nome": "Carlos",
+      "sobrenome": ""
+    },
+    {
+      "id": 5,
+      "nome": "Ana",
+      "sobrenome": "Oliveira"
+    }
+  ],
   "alunos": [
     {
       "id": 2023001,
       "nome": "Pspsps",
-      "sobrenome": "Pspsps"
+      "sobrenome": "Pspsps",
+      "dataNasc": "02/03/2000",
+      "professor": {
+        "id": 3,
+        "nome": "Maria",
+        "sobrenome": "Silva"
+      }
     },
     {
-      "id": 2023002,
-      "nome": "Aaaa",
-      "sobrenome": "Bbbb"
+      "id": 2023003,
+      "nome": "João",
+      "sobrenome": "Pereira",
+      "dataNasc": "15/07/2001",
+      "professor": {
+        "id": 2,
+        "nome": "The",
+        "sobrenome": "Rock"
+      }
+    },
+    {
+      "id": 2023004,
+      "nome": "Fernanda",
+      "sobrenome": "Costa",
+      "dataNasc": "22/11/1999",
+      "professor": {
+        "id": 3,
+        "nome": "Maria",
+        "sobrenome": "Silva"
+      }
+    },
+    {
+      "id": 2023005,
+      "nome": "Ricardo",
+      "sobrenome": "Almeida",
+      "dataNasc": "30/05/2002",
+      "professor": {
+        "id": 4,
+        "nome": "Carlos",
+        "sobrenome": "Santos"
+      }
+    },
+    {
+      "id": 2023006,
+      "nome": "Abacate",
+      "sobrenome": "",
+      "dataNasc": "10/01/2003",
+      "professor": {
+        "id": 1,
+        "nome": "Pericles",
+        "sobrenome": "Pericles"
+      }
+    },
+    {
+      "id": 2023007,
+      "nome": "teste",
+      "sobrenome": "",
+      "dataNasc": "18/09/2000",
+      "professor": {
+        "id": 5,
+        "nome": "Ana",
+        "sobrenome": "Oliveira"
+      }
+    },
+    {
+      "nome": "AAA",
+      "sobrenome": "",
+      "professor": {
+        "id": 1,
+        "nome": "Pericles",
+        "sobrenome": "Pericles"
+      },
+      "id": 2023008
     }
   ]
 }
