@@ -8,19 +8,18 @@
 </template>
 
 <script>
-
-import Nav from './components/_nav/Nav-A.vue'
+import Nav from "./components/_nav/Nav-A.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Nav
-  }
-}
+    Nav,
+  },
+};
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap");
 
 #app {
   width: 100%;
@@ -33,7 +32,7 @@ export default {
 
 body {
   background-color: lightgray;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   display: grid;
   justify-items: center;
 }
