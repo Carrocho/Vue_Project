@@ -31,11 +31,11 @@
       "id": 2023001,
       "nome": "Pspsps",
       "sobrenome": "Pspsps",
-      "dataNasc": "02/03/2000",
+      "dataNasc": "02/03/2001",
       "professor": {
-        "id": 3,
-        "nome": "Maria",
-        "sobrenome": "Silva"
+        "id": 1,
+        "nome": "Pericles",
+        "sobrenome": "Pericles"
       }
     },
     {
@@ -102,6 +102,16 @@
         "sobrenome": "Pericles"
       },
       "id": 2023008
+    },
+    {
+      "nome": "asasdasdsa",
+      "sobrenome": "",
+      "professor": {
+        "id": 3,
+        "nome": "Maria",
+        "sobrenome": "Silva"
+      },
+      "id": 2023009
     }
   ]
 }

@@ -45,32 +45,67 @@ namespace Projeto_API.Migrations
             migrationBuilder.InsertData(
                 table: "Professores",
                 columns: new[] { "Id", "nome", "sobrenome" },
-                values: new object[] { 1, "Pericles", "Pericles" });
+                values: new object[] { 1, "Carlos", "Magno" });
 
             migrationBuilder.InsertData(
                 table: "Professores",
                 columns: new[] { "Id", "nome", "sobrenome" },
-                values: new object[] { 2, "The", "Rock" });
+                values: new object[] { 2, "Mariana", "Silveira" });
 
             migrationBuilder.InsertData(
                 table: "Professores",
                 columns: new[] { "Id", "nome", "sobrenome" },
-                values: new object[] { 3, "Pspspsps", "Da Silva" });
+                values: new object[] { 3, "Roberto", "Fontes" });
+
+            migrationBuilder.InsertData(
+                table: "Professores",
+                columns: new[] { "Id", "nome", "sobrenome" },
+                values: new object[] { 4, "Ana", "Carolina" });
+
+            migrationBuilder.InsertData(
+                table: "Professores",
+                columns: new[] { "Id", "nome", "sobrenome" },
+                values: new object[] { 5, "Lucas", "Pereira" });
 
             migrationBuilder.InsertData(
                 table: "Alunos",
                 columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
-                values: new object[] { 2023001, "11/09/2001", "Aluno", 1, "A" });
+                values: new object[] { 2023001, "15/03/2002", "João", 1, "Santos" });
 
             migrationBuilder.InsertData(
                 table: "Alunos",
                 columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
-                values: new object[] { 2023002, "11/09/2001", "Aluno", 2, "B" });
+                values: new object[] { 2023006, "30/01/2001", "Beatriz", 1, "Rocha" });
 
             migrationBuilder.InsertData(
                 table: "Alunos",
                 columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
-                values: new object[] { 2023003, "11/09/2001", "Aluno", 3, "C" });
+                values: new object[] { 2023002, "22/07/2001", "Maria", 2, "Oliveira" });
+
+            migrationBuilder.InsertData(
+                table: "Alunos",
+                columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
+                values: new object[] { 2023007, "12/12/2000", "Rafael", 2, "Lima" });
+
+            migrationBuilder.InsertData(
+                table: "Alunos",
+                columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
+                values: new object[] { 2023003, "10/11/2000", "Pedro", 3, "Costa" });
+
+            migrationBuilder.InsertData(
+                table: "Alunos",
+                columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
+                values: new object[] { 2023008, "08/08/2003", "Isabela", 3, "Souza" });
+
+            migrationBuilder.InsertData(
+                table: "Alunos",
+                columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
+                values: new object[] { 2023004, "05/05/2003", "Laura", 4, "Fernandes" });
+
+            migrationBuilder.InsertData(
+                table: "Alunos",
+                columns: new[] { "Id", "dataNasc", "nome", "professorId", "sobrenome" },
+                values: new object[] { 2023005, "18/09/2002", "Gabriel", 5, "Martins" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Alunos_professorId",

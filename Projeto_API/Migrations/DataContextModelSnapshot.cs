@@ -43,26 +43,66 @@ namespace Projeto_API.Migrations
                         new
                         {
                             Id = 2023001,
-                            dataNasc = "11/09/2001",
-                            nome = "Aluno",
+                            dataNasc = "15/03/2002",
+                            nome = "João",
                             professorId = 1,
-                            sobrenome = "A"
+                            sobrenome = "Santos"
                         },
                         new
                         {
                             Id = 2023002,
-                            dataNasc = "11/09/2001",
-                            nome = "Aluno",
+                            dataNasc = "22/07/2001",
+                            nome = "Maria",
                             professorId = 2,
-                            sobrenome = "B"
+                            sobrenome = "Oliveira"
                         },
                         new
                         {
                             Id = 2023003,
-                            dataNasc = "11/09/2001",
-                            nome = "Aluno",
+                            dataNasc = "10/11/2000",
+                            nome = "Pedro",
                             professorId = 3,
-                            sobrenome = "C"
+                            sobrenome = "Costa"
+                        },
+                        new
+                        {
+                            Id = 2023004,
+                            dataNasc = "05/05/2003",
+                            nome = "Laura",
+                            professorId = 4,
+                            sobrenome = "Fernandes"
+                        },
+                        new
+                        {
+                            Id = 2023005,
+                            dataNasc = "18/09/2002",
+                            nome = "Gabriel",
+                            professorId = 5,
+                            sobrenome = "Martins"
+                        },
+                        new
+                        {
+                            Id = 2023006,
+                            dataNasc = "30/01/2001",
+                            nome = "Beatriz",
+                            professorId = 1,
+                            sobrenome = "Rocha"
+                        },
+                        new
+                        {
+                            Id = 2023007,
+                            dataNasc = "12/12/2000",
+                            nome = "Rafael",
+                            professorId = 2,
+                            sobrenome = "Lima"
+                        },
+                        new
+                        {
+                            Id = 2023008,
+                            dataNasc = "08/08/2003",
+                            nome = "Isabela",
+                            professorId = 3,
+                            sobrenome = "Souza"
                         });
                 });
 
@@ -86,20 +126,32 @@ namespace Projeto_API.Migrations
                         new
                         {
                             Id = 1,
-                            nome = "Pericles",
-                            sobrenome = "Pericles"
+                            nome = "Carlos",
+                            sobrenome = "Magno"
                         },
                         new
                         {
                             Id = 2,
-                            nome = "The",
-                            sobrenome = "Rock"
+                            nome = "Mariana",
+                            sobrenome = "Silveira"
                         },
                         new
                         {
                             Id = 3,
-                            nome = "Pspspsps",
-                            sobrenome = "Da Silva"
+                            nome = "Roberto",
+                            sobrenome = "Fontes"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            nome = "Ana",
+                            sobrenome = "Carolina"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            nome = "Lucas",
+                            sobrenome = "Pereira"
                         });
                 });
 
