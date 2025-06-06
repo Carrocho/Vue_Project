@@ -29,8 +29,9 @@ export default {
 .voltar {
     width: auto;
     position: relative;
-    margin-top: 15px;
+    margin-top: 35px;
     margin-left: auto;
+    margin-right: 5px;
 }
 
 .btnVoltar {

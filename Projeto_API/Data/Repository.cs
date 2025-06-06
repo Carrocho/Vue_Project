@@ -43,7 +43,7 @@ namespace Projeto_API.Data
                 query = query.Include(a => a.professor);
             }
 
-            query.AsNoTracking().OrderBy(a => a.Id);
+            query = query.AsNoTracking().OrderBy(a => a.Id);
 
             return await query.ToArrayAsync();
         }
@@ -55,7 +55,7 @@ namespace Projeto_API.Data
                 query = query.Include(a => a.professor);
             }
 
-            query.AsNoTracking()
+            query = query.AsNoTracking()
                 .OrderBy(a => a.Id)
                 .Where(aluno => aluno.Id == alunoId);
 
@@ -69,9 +69,9 @@ namespace Projeto_API.Data
                 query = query.Include(a => a.professor);
             }
 
-            query.AsNoTracking()
-                .OrderBy(a => a.Id)
-                .Where(aluno => aluno.professorId == professorId);
+            query = query.AsNoTracking()
+                 .Where(aluno => aluno.professorId == professorId)
+                 .OrderBy(a => a.Id);
 
             return await query.ToArrayAsync();
         }
@@ -84,7 +84,7 @@ namespace Projeto_API.Data
                 query = query.Include(p => p.alunos);
             }
 
-            query.AsNoTracking().OrderBy(p => p.Id);
+            query = query.AsNoTracking().OrderBy(p => p.Id);
 
             return await query.ToArrayAsync();
         }
@@ -96,7 +96,7 @@ namespace Projeto_API.Data
                 query = query.Include(p => p.alunos);
             }
 
-            query.AsNoTracking()
+            query = query.AsNoTracking()
                 .OrderBy(a => a.Id)
                 .Where(professor => professor.Id == professorId);
 

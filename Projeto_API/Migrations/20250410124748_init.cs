@@ -13,12 +13,19 @@ namespace Projeto_API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     nome = table.Column<string>(nullable: true),
-                    sobrenome = table.Column<string>(nullable: true)
+                    sobrenome = table.Column<string>(nullable: true),
+                    foto = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Professores", x => x.Id);
                 });
+
+            migrationBuilder.Sql("INSERT INTO NewProfessor (Id, nome, sobrenome) SELECT Id, nome, sobrenome FROM Professor");
+
+            migrationBuilder.DropTable(name: "Professor");
+
+            migrationBuilder.RenameTable(name: "NewProfessor", newName: "Professor");
 
             migrationBuilder.CreateTable(
                 name: "Alunos",
@@ -45,7 +52,7 @@ namespace Projeto_API.Migrations
             migrationBuilder.InsertData(
                 table: "Professores",
                 columns: new[] { "Id", "nome", "sobrenome" },
-                values: new object[] { 1, "Carlos", "Magno" });
+                values: new object[] { 1, "Carlos", "Magno", "/images/dg5dz0zn.png"});
 
             migrationBuilder.InsertData(
                 table: "Professores",

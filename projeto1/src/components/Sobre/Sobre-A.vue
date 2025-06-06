@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Titulo texto="Sobre"></Titulo>
+        <Titulo texto="Sobre" :boolVoltar="true"></Titulo>
         <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure sequi expedita itaque aliquid cum nam repellat
             recusandae qui enim dolorum, veniam sit rem animi voluptatibus, dolorem facere rerum, totam corporis?

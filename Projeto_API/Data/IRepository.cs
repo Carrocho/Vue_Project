@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Projeto_API.models;
+using SQLitePCL;
 
 namespace Projeto_API.Data
 {
     public interface IRepository
     {
+        public DataContext _context { get; }
         //Geral
         void Add<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;

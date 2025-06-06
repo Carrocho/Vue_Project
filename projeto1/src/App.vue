@@ -21,6 +21,10 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap");
 
+.none {
+   display: none;
+}
+
 #app {
   width: 100%;
 }
@@ -90,7 +94,21 @@ table thead th {
 
 .btn:hover {
   text-shadow: 1px 1px black;
-  border-bottom: 1px solid black;
+  border-bottom: 1.5px solid black;
   margin-top: 2px;
+}
+
+.btnFoto {
+    background-color: rgb(114, 114, 252);
+    width: 70px;
+    font-size: 0.52em;
+    border: 1.5px solid black;
+  
+}
+
+.btnFoto:hover {
+  text-shadow: 1px 1px black;
+  border: 1.5px solid black;
+  margin-top: 0px;
 }
 </style>

@@ -1,15 +1,34 @@
 <template>
-    <div>
-        <Titulo :texto="`Aluno: ${aluno.nome} `" :boolVoltar="!visualizando"> 
+    <div v-if="!loading">
+        <Titulo :texto="`Aluno: ${aluno.nome} `" :boolVoltar="!visualizando">
             <button v-show="visualizando" class="btn btnEditar" @click="editar()">Editar</button>
         </Titulo>
-        
+
         <table>
             <tbody>
+                <tr>
+                    <td class="colPequeno" style="height: 50px;">Foto:</td>
+                    <td>
+                        <div style="display: flex; align-items: center;">
+                            <img v-if="aluno.foto" :src="this.fotoTemp" alt="Foto do aluno" style="width: 150px; height: 150px; object-fit: cover;">
+                            <input ref="input" type="file" class="none" accept="image/*" @change="handleFile($event)">
+                            <div v-if="!visualizando" style="margin-left: 10px;">
+                                <Button v-if="aluno.foto" type="button" class="btn btnFoto" @click="openFileDialog()">Editar Foto</Button>
+                                <Button v-else type="button" class="btn btnFoto" @click="openFileDialog()">Inserir Foto</Button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td class="colPequeno">Matrícula:</td>
                     <td>
                         <label>{{ aluno.id }}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="colPequeno">CPF:</td>
+                    <td>
+                        <label>{{ aluno.cpf }}</label>
                     </td>
                 </tr>
                 <tr>
@@ -37,9 +56,10 @@
                     <td class="colPequeno">Professor:</td>
                     <td>
                         <label v-if="visualizando">{{ aluno.professor.nome }}</label>
-                        <select v-else v-model="aluno.professor">
-                            <option v-for="(professor, index) in professores" :key="index" v-bind:value="professor">
+                        <select v-else v-model="aluno.professor.id">
+                            <option v-for="(professor, index) in professores" :key="index" v-bind:value="professor.id">
                                 {{ professor.nome }}
+                                
                             </option>
                         </select>
                     </td>
@@ -49,7 +69,7 @@
         <div style="margin-top: 10px;">
             <div v-if="!visualizando">
                 <button class="btn btnCancelar" @click="cancelar()">Cancelar</button>
-                <button class="btn btnSalvar" @click="salvar(aluno)">Salvar</button>
+                <button class="btn btnSalvar" @click="salvar()">Salvar</button>
             </div>
         </div>
     </div>
@@ -66,41 +86,75 @@ export default {
             professores: [],
             aluno: {},
             idAluno: this.$route.params.aluno_id,
-            visualizando: true
+            visualizando: true,
+            loading: true,
+            fotoTemp : null
         }
     },
     created() {
-        this.$http.get('http://localhost:3000/alunos/' + this.idAluno)
-            .then(res => res.json())
-            .then(aluno => this.aluno = aluno)
-
-        this.$http
-            .get('http://localhost:3000/professores')
-            .then(res => res.json())
-            .then(professores => this.professores = professores)
+        this.carregarProfessor();
     },
     methods: {
-        editar(){
+        openFileDialog() {
+            this.$refs.input.value = null;
+            this.$refs.input.click();
+        },
+        handleFile(evento) {
+            const file = evento.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    // Converte o resultado (ArrayBuffer) para byte[]
+                    const arrayBuffer = e.target.result;
+                    const byteArray = new Uint8Array(arrayBuffer);
+                    this.aluno.foto = Array.from(byteArray); // Converte para array de bytes
+                    console.log("Imagem convertida para byte[]:", this.aluno.foto);
+                };
+                reader.readAsArrayBuffer(file); // Lê o arquivo como ArrayBuffer
+                this.fotoTemp = URL.createObjectURL(file);
+            }
+        },
+        editar() {
             this.visualizando = !this.visualizando;
         },
-        salvar(_aluno){
+        salvar() {
             let _alunoEditado = {
-                id: _aluno.id,
-                nome: _aluno.nome,
-                sobrenome: _aluno.sobrenome,
-                dataNasc: _aluno.dataNasc,
-                professor: _aluno.professor
+                id: this.aluno.id,
+                nome: this.aluno.nome,
+                sobrenome: this.aluno.sobrenome,
+                dataNasc: this.aluno.dataNasc,
+                professorid: this.aluno.professor.id,
+                foto: this.aluno.foto
             }
 
-            this.$http.put(`http://localhost:3000/alunos/${_alunoEditado.id}`, _alunoEditado)
-            .then(res => res.json())
-            .then(alunos => this.alunos = alunos)
+            this.$http.put(`http://localhost:5000/api/aluno/${_alunoEditado.id}`, _alunoEditado)
+                .then(res => res.json())
+                .then(aluno => this.aluno = aluno)
 
             this.visualizando = !this.visualizando;
 
         },
-        cancelar(){
+        cancelar() {
             this.visualizando = !this.visualizando;
+            this.carregarAluno();
+        },
+        carregarProfessor() {
+            this.$http
+                .get('http://localhost:5000/api/professor')
+                .then(res => res.json())
+                .then(professores => {
+                    this.professores = professores;
+                    this.carregarAluno();
+                });
+        },
+        carregarAluno() {
+            this.$http.get(`http://localhost:5000/api/aluno/${this.idAluno}`)
+            .then(res => res.json())
+            .then(aluno => {
+                this.fotoTemp = `http://localhost:5000/api/aluno/${aluno.id}/foto`
+                this.aluno = aluno;
+                this.loading = false; 
+            });
         }
 
     }
@@ -108,14 +162,16 @@ export default {
 </script>
 
 <style scoped>
+
 .colPequeno {
-  width: 20%;  
-  text-align: right;
-  background-color: rgb(100, 253, 202);
-  font-weight: bold;
+    width: 20%;
+    text-align: right;
+    background-color: rgb(100, 253, 202);
+    font-weight: bold;
 }
 
-input, select {
+input,
+select {
     margin: 0px;
     padding: 5 5 10 10;
     font-size: 0.9em;
@@ -132,12 +188,12 @@ select {
 }
 
 table tr td {
-  text-align: left;
+    text-align: left;
 }
 
-.btnEditar{
+.btnEditar {
     float: right;
-    background-color:rgb(114, 114, 252) ;
+    background-color: rgb(114, 114, 252);
     width: 90px;
 }
 
@@ -147,7 +203,7 @@ table tr td {
     background-color: lightgreen;
 }
 
-.btnCancelar{
+.btnCancelar {
     float: left;
     width: 20%;
     background-color: rgb(252, 103, 86);
