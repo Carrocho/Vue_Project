@@ -4,13 +4,33 @@
             <router-link to="/professores">Professores</router-link>
             <router-link to="/alunos">Alunos</router-link>
             <router-link to="/sobre">Sobre</router-link>
+            <router-link v-if="isUsuarioAdmin" to="/registroADM">
+                Cadastrar Admin
+            </router-link>
+            <a href="#" @click.prevent="fazerLogout" class="logout-link">Sair</a>
         </nav>
     </div>
 </template>
 
 <script>
 export default {
-
+    data(){
+        return{
+            isLogado: true,
+        }
+    },
+    computed: {
+    isUsuarioAdmin() {
+      return localStorage.getItem('isAdmin') === 'true';
+    }
+  },
+   methods: {
+    fazerLogout() {
+      localStorage.removeItem('user-token');
+      localStorage.removeItem('isAdmin');
+      this.$router.push('/login');
+    }
+  }
 }
 </script>
 

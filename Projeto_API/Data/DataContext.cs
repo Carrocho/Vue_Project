@@ -12,6 +12,7 @@ namespace Projeto_API.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Professor> Professores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,7 +23,13 @@ namespace Projeto_API.Data
             builder.Entity<Aluno>()
                 .HasIndex(a => a.cpf)
                 .IsUnique();
-            
+
+            builder.Entity<Usuario>()
+                .HasKey(a => a.nomeUsuario);
+
+            builder.Entity<Usuario>()
+                .Property(a => a.isAdmin)
+                .HasDefaultValue(false);
         }
     }
 }

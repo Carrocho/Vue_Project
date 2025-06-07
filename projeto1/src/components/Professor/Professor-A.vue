@@ -2,7 +2,7 @@
     <div>
         <Titulo texto="Professores" :boolVoltar="true" />
         <input ref="input" type="file" style="display: none;" accept="image/*" @change="handleFile($event)">
-        <div>
+        <div v-if="isUsuarioAdmin">
             <input type="text" placeholder="Nome do professor" v-model="nome">
             <button class="btn btnInput" @click="adicionarProfessor()">Adicionar</button>
             <input type="text" placeholder="CPF do professor" v-model="cpfBase"
@@ -61,6 +61,11 @@ export default {
             cpfBase: "",
             cpfInvalido: false,
             cpfExistente: false
+        }
+    },
+    computed: {
+        isUsuarioAdmin() {
+            return localStorage.getItem('isAdmin') === 'true';
         }
     },
     created() {

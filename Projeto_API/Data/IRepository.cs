@@ -17,13 +17,17 @@ namespace Projeto_API.Data
         Task<bool> SaveChangesAsync();
 
         // Aluno
-        Task<Aluno[]>GetAllAlunosAsync(Boolean includeProfessor);
-        Task<Aluno>GetAlunoAsyncById(int alunoId, Boolean includeProfessor);
-        Task<Aluno[]>GetAlunosByProfessorId(int professorId, Boolean includeProfessor);
+        Task<Aluno[]> GetAllAlunosAsync(Boolean includeProfessor);
+        Task<Aluno> GetAlunoAsyncById(int alunoId, Boolean includeProfessor);
+        Task<Aluno[]> GetAlunosByProfessorId(int professorId, Boolean includeProfessor);
 
         // Professor
 
-        Task<Professor[]>GetAllProfessoresAsync(Boolean includeAluno);
-        Task<Professor>GetProfessorAsyncById(int professorId, Boolean includeAluno);
+        Task<Professor[]> GetAllProfessoresAsync(Boolean includeAluno);
+        Task<Professor> GetProfessorAsyncById(int professorId, Boolean includeAluno);
+
+        // Usuario
+        Task<Usuario[]> GetAllUsuariosAsync();
+        Task<Usuario> GetUsuarioAsyncByPK(string nomeUsuario);
     }
 }

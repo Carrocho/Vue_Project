@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <Nav></Nav>
+    <!-- Use v-if para mostrar o Nav somente se o usuário estiver logado -->
+    <Nav v-if="usuarioLogado"></Nav>
+
     <div class="margemPrincipal">
-      <router-view :key="$route.fullPath"> </router-view>
+      <router-view :key="$route.fullPath"></router-view>
     </div>
   </div>
 </template>
@@ -15,6 +17,28 @@ export default {
   components: {
     Nav,
   },
+  data() {
+    return {
+      usuarioLogado: false
+    }
+  },
+  watch: {
+    '$route'() {
+      this.verificarLogin();
+    }
+  },
+  created() {
+    this.verificarLogin();
+  },
+  methods: {
+    verificarLogin() {
+      if (localStorage.getItem('user-token')) {
+        this.usuarioLogado = true;
+      } else {
+        this.usuarioLogado = false;
+      }
+    }
+  }
 };
 </script>
 

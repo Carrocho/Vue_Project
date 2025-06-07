@@ -8,18 +8,14 @@
 
     <img v-if="professor.foto" :src="`http://localhost:5000${professor.foto}`" alt="Foto do professor"
       style="width: 250px; height: 250px; object-fit: cover;">
-    <div class="divInput" v-if="professorId != undefined">
+    <div class="divInput" v-if="professorId != undefined && isUsuarioAdmin">
       <h3>CPF Professor: {{ professor.cpf }}</h3>
       <input type="text" placeholder="Nome do Aluno" v-model="nome" v-on:keyup.enter="adicionarAluno()">
       <button class="btn btnInput" @click="adicionarAluno(nome)">Adicionar</button>
       <input type="text" placeholder="CPF do aluno" v-model="cpfBase"
         @input="cpfBase = formatarCPF($event.target.value)" maxlength="14" />
-      <div v-if="cpfInvalido" style="color: red; margin-bottom: 10px; display: inline;">
-        CPF inválido!
-      </div>
-      <div v-if="cpfExistente" style="color: red; margin-bottom: 10px; display: inline;">
-        CPF já existe!
-      </div>
+      <div v-if="cpfInvalido" style="color: red;">CPF inválido!</div>
+      <div v-if="cpfExistente" style="color: red;">CPF já existe!</div>
     </div>
     <div>
       <table>
@@ -28,7 +24,7 @@
           <th>Matrícula</th>
           <th>CPF</th>
           <th>Nome</th>
-          <th>Opções</th>
+          <th v-if="isUsuarioAdmin">Opções</th>
         </thead>
         <tbody>
           <tr v-for="(aluno, index) in alunos" :key="index">
@@ -38,10 +34,11 @@
             </td>
             <td class="colPequeno" style="text-align: center; width: 20%;">{{ aluno.id }}</td>
             <td class="colPequeno" style="text-align: center; width: 20%;">{{ aluno.cpf }}</td>
-            <router-link v-bind:to="`/alunoDetalhe/${aluno.id}`" tag="td" style="cursor: pointer;">
+            <router-link v-bind:to="`/alunoDetalhe/${aluno.id}`" tag="td" style="cursor: pointer;" v-if="isUsuarioAdmin">
               {{ aluno.nome }} {{ aluno.sobrenome }}
             </router-link>
-            <td class="colPequeno" style="text-align: center; width: 20%;">
+            <td class="colPequeno" style="text-align: center; width: 20%;" v-else>{{ aluno.nome }} {{ aluno.sobrenome }}</td>
+            <td v-if="isUsuarioAdmin" class="colPequeno" style="text-align: center; width: 20%;">
               <button class="btn btnDanger" @click="removerAluno(aluno)">Remover</button>
             </td>
           </tr>
@@ -77,6 +74,11 @@ export default {
       cpfExistente: false
     }
   },
+  computed: {
+        isUsuarioAdmin() {
+            return localStorage.getItem('isAdmin') === 'true';
+        }
+    },
   created() {
     if (this.professorId) {
       this.carregarProfessores();
@@ -131,26 +133,26 @@ export default {
           this.nome = '';
         })
         .catch(error => {
-        console.error("Erro ao adicionar aluno:", error);
+          console.error("Erro ao adicionar aluno:", error);
 
-        let mensagemDeErroDoServidor = "";
-        let statusDoErro = null;
+          let mensagemDeErroDoServidor = "";
+          let statusDoErro = null;
 
-        if (error.body) {
-          mensagemDeErroDoServidor = error.body;
-        }
+          if (error.body) {
+            mensagemDeErroDoServidor = error.body;
+          }
 
-        if (error.status) {
-          statusDoErro = error.status;
-        }
+          if (error.status) {
+            statusDoErro = error.status;
+          }
 
-        if (statusDoErro === 400 && mensagemDeErroDoServidor.toLowerCase().includes('erro 02')) {
-          this.cpfExistente = true; 
-        } 
-        if (statusDoErro === 400 && mensagemDeErroDoServidor.toLowerCase().includes('erro 01')) {
-          this.cpfInvalido = true; 
-        } 
-      });
+          if (statusDoErro === 400 && mensagemDeErroDoServidor.toLowerCase().includes('erro 02')) {
+            this.cpfExistente = true;
+          }
+          if (statusDoErro === 400 && mensagemDeErroDoServidor.toLowerCase().includes('erro 01')) {
+            this.cpfInvalido = true;
+          }
+        });
     },
     removerAluno(aluno) {
       this.$http.delete(`http://localhost:5000/api/aluno/${aluno.id}`).then(() => {

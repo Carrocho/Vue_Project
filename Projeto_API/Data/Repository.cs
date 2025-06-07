@@ -39,7 +39,8 @@ namespace Projeto_API.Data
         public async Task<Aluno[]> GetAllAlunosAsync(bool includeProfessor = false)
         {
             IQueryable<Aluno> query = _context.Alunos;
-            if(includeProfessor){
+            if (includeProfessor)
+            {
                 query = query.Include(a => a.professor);
             }
 
@@ -51,7 +52,8 @@ namespace Projeto_API.Data
         public async Task<Aluno> GetAlunoAsyncById(int alunoId, Boolean includeProfessor)
         {
             IQueryable<Aluno> query = _context.Alunos;
-            if(includeProfessor){
+            if (includeProfessor)
+            {
                 query = query.Include(a => a.professor);
             }
 
@@ -65,7 +67,8 @@ namespace Projeto_API.Data
         public async Task<Aluno[]> GetAlunosByProfessorId(int professorId, bool includeProfessor)
         {
             IQueryable<Aluno> query = _context.Alunos;
-            if(includeProfessor){
+            if (includeProfessor)
+            {
                 query = query.Include(a => a.professor);
             }
 
@@ -80,7 +83,8 @@ namespace Projeto_API.Data
         public async Task<Professor[]> GetAllProfessoresAsync(bool includeAluno)
         {
             IQueryable<Professor> query = _context.Professores;
-            if(includeAluno){
+            if (includeAluno)
+            {
                 query = query.Include(p => p.alunos);
             }
 
@@ -92,7 +96,8 @@ namespace Projeto_API.Data
         public async Task<Professor> GetProfessorAsyncById(int professorId, bool includeAluno)
         {
             IQueryable<Professor> query = _context.Professores;
-            if(includeAluno){
+            if (includeAluno)
+            {
                 query = query.Include(p => p.alunos);
             }
 
@@ -102,5 +107,31 @@ namespace Projeto_API.Data
 
             return await query.FirstOrDefaultAsync();
         }
+
+
+        //usuario
+
+        public async Task<Usuario[]> GetAllUsuariosAsync()
+        {
+            IQueryable<Usuario> query = _context.Usuarios;
+
+            query = query.AsNoTracking().OrderBy(p => p.nomeUsuario);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<Usuario> GetUsuarioAsyncByPK(string nomeUsuario)
+        {
+            IQueryable<Usuario> query = _context.Usuarios;
+
+            query = query.AsNoTracking()
+                .OrderBy(a => a.nomeUsuario)
+                .Where(usuario => usuario.nomeUsuario == nomeUsuario);
+
+            return await query.FirstOrDefaultAsync();
+        }
+
     }
+    
+
 }
