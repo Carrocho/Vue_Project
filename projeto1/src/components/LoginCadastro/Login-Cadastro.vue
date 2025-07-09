@@ -97,7 +97,7 @@ export default {
                 });
         },
         handleCadastro() {
-            // Lógica para o cadastro
+            // Lógica para o cadastroaaaaa
             if (!this.nome || !this.senha || !this.senhaConfirmar) {
                 alert("Por favor, preencha todos os campos.");
                 return;
